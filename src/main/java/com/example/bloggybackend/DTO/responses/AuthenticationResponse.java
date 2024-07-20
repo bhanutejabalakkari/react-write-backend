@@ -1,4 +1,4 @@
-package com.example.bloggybackend.dtos.auth.responses;
+package com.example.bloggybackend.DTO.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

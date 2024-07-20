@@ -1,8 +1,8 @@
 package com.example.bloggybackend.services;
 
-import com.example.bloggybackend.dtos.auth.responses.AuthenticationResponse;
-import com.example.bloggybackend.dtos.auth.requests.SigninRequest;
-import com.example.bloggybackend.dtos.auth.requests.SignupRequest;
+import com.example.bloggybackend.DTO.responses.AuthenticationResponse;
+import com.example.bloggybackend.DTO.requests.SigninRequest;
+import com.example.bloggybackend.DTO.requests.SignupRequest;
 import com.example.bloggybackend.models.Role;
 import com.example.bloggybackend.models.User;
 import com.example.bloggybackend.models.UserPrincipal;
@@ -46,6 +46,8 @@ public class UserService {
 
     public AuthenticationResponse authenticate(SigninRequest request) {
 
+        System.out.println("In authenticate method");
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
@@ -54,11 +56,8 @@ public class UserService {
             System.out.println("User is invalid");
             throw new RuntimeException("User is invalid");
         }
-
-
-
+        
         User user = userRepository.findByEmail(request.getEmail());
-
         String jwtToken = jwtService.generateToken(new UserPrincipal(user));
 
         return AuthenticationResponse.builder()

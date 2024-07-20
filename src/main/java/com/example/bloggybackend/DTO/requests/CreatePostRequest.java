@@ -1,11 +1,12 @@
-package com.example.bloggybackend.dtos.auth.requests;
+package com.example.bloggybackend.DTO.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
+
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,30 +17,25 @@ import org.springframework.web.multipart.MultipartFile;
 public class CreatePostRequest {
 
     @JsonProperty(value = "title")
-    @NotNull
-    @NotBlank
-    @NotEmpty
+    @NotBlank(message = "Please provide a valid title")
     private String title;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
+
+    @NotBlank(message = "Please provide a valid slug")
     @JsonProperty(value = "slug")
     private String slug;
 
-    @NotNull
-    @NotBlank
-    @NotEmpty
+
+    @NotBlank(message = "Please provide a valid content")
     @JsonProperty(value = "content")
     private String content;
 
     @JsonProperty(value = "active")
-    @NonNull
-    @NotEmpty
+    @NotNull(message = "Please provide active")
     private Boolean active;
 
     @JsonProperty(value = "image")
-    @NonNull
+    @NotNull(message = "Please provide image")
     private MultipartFile image;
 
 

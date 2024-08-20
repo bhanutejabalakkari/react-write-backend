@@ -12,9 +12,14 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
 
-    Post deletePostById(Integer postId);
+    Integer deletePostById(Integer postId);
+
+    @Query(value = "SELECT p FROM Post p JOIN FETCH p.user where p.id = :postId")
+    Post getPostWithUser(Integer postId);
 
     @Query(value = "SELECT p FROM Post p where p.active = true")
     List<Post> getAllPosts();
 
+    @Query(value = "SELECT p from Post p WHERE p.id = :postId")
+    Post getPostById(Integer postId);
 }

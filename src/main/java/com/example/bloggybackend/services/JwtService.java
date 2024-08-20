@@ -1,11 +1,14 @@
 package com.example.bloggybackend.services;
 
+import com.example.bloggybackend.exception.CustomRuntimeException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
 @Service
+@Slf4j
 public class JwtService {
 
     @Value("${jwt.secret}")
@@ -91,6 +95,8 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getPayload();
+
+
     }
 
 
